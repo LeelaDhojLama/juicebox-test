@@ -1,4 +1,8 @@
-.formContainer {
-  padding-top: 24px;
-  padding-bottom: 24px;
+@media (max-width: 768px) {
+  .formContainer {
+    position: absolute;
+    bottom: 8px;
+    right: 6px;
+    left: 6px;
+  }
 }

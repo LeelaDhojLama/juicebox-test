@@ -94,7 +94,7 @@ function FormPage() {
           {formSteps[formIndex].label}
         </Label>
       </div>
-      <div className="absolute bottom-0 right-6 left-6">
+      <div className={styles.formContainer}>
         {formIndex === 0 ? (
           <>
             <div>

@@ -33,18 +33,28 @@ const SwiperContainer = () => {
   const [isSwiperLastIndex, setIsSwiperLastIndex] = useState<boolean>(false);
   const swiperRef = useRef<SwiperCore | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const divRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+
+  let tl = gsap.timeline();
 
   const onNextClick = () => {
     if (isSwiperLastIndex) {
-      gsap.to(imgRef.current, {
+      tl.to(imgRef.current, {
         width: 32,
         duration: 1,
         opacity: 0,
         onComplete: () => {
           router.push("/pages/form");
         },
-      });
+      }).to(
+        divRef.current,
+        {
+          opacity: 0,
+          duration: 0.5,
+        },
+        "<"
+      );
     }
     swiperRef.current?.slideNext();
   };
@@ -61,43 +71,45 @@ const SwiperContainer = () => {
     <>
       <div style={{ paddingBottom: 32 }}>
         <ToolBar onBackClick={onBackClick} />
-        <AITalkVector imgRef={imgRef} width={"50%"} doAnimation={true} />
-        <Swiper
-          modules={[Pagination]}
-          spaceBetween={50}
-          slidesPerView={1}
-          onSlideChange={() => {
-            setIsSwiperLastIndex(
-              swiperRef.current?.activeIndex ===
-                tutorialGuideMessages.length - 1
-            );
-          }}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          pagination={{ clickable: true }}
-          style={{ padding: "32px 0 60px 0" }}
-        >
-          {tutorialGuideMessages.map(
-            (tutorialGuideMessage: string, index: number) => {
-              return (
-                <SwiperSlide key={index}>
-                  <TutorialCard message={tutorialGuideMessage} />
-                </SwiperSlide>
+        <AITalkVector imgRef={imgRef} width={"50%"} />
+        <div ref={divRef}>
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => {
+              setIsSwiperLastIndex(
+                swiperRef.current?.activeIndex ===
+                  tutorialGuideMessages.length - 1
               );
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            pagination={{ clickable: true }}
+            style={{ padding: "32px 0 60px 0" }}
+          >
+            {tutorialGuideMessages.map(
+              (tutorialGuideMessage: string, index: number) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <TutorialCard message={tutorialGuideMessage} />
+                  </SwiperSlide>
+                );
+              }
+            )}
+          </Swiper>
+          <Button
+            variant={
+              isSwiperLastIndex
+                ? ButtonVariant.secondary
+                : ButtonVariant.secondaryOutline
             }
-          )}
-        </Swiper>
+            label={isSwiperLastIndex ? "Get Started" : "Continue"}
+            onClick={onNextClick}
+          />
+        </div>
       </div>
-      <Button
-        variant={
-          isSwiperLastIndex
-            ? ButtonVariant.secondary
-            : ButtonVariant.secondaryOutline
-        }
-        label={isSwiperLastIndex ? "Get Started" : "Continue"}
-        onClick={onNextClick}
-      />
     </>
   );
 };
