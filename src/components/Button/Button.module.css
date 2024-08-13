@@ -1,0 +1,6 @@
+.btn {
+}
+.btn:focus {
+  outline: none;
+  box-shadow: var(--button-shadow);
+}

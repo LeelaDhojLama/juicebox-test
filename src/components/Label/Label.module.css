@@ -1,0 +1,11 @@
+.introHeadingText {
+  font-family: Bagoss;
+  font-size: var(--font-size-h2);
+  /*font-size: var(--font-size-1x);*/
+  font-weight: var(--font-weight-h2);
+  line-height: 33.6px;
+  /*line-height: 22.8x;*/
+  letter-spacing: 0.01em;
+  text-align: center;
+  padding: 15px 7px 44px 7px;
+}

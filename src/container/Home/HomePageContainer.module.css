@@ -1,0 +1,74 @@
+.container {
+  position: relative;
+}
+
+.contentOverlay {
+  position: absolute;
+  top: 0;
+}
+
+.contentOverlay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 46px 0 20px 0;
+}
+
+.contentOverlay p {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  font-family: Sohne;
+  letter-spacing: 0.02em;
+}
+
+.contentOverlay p:nth-child(even) {
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  padding-top: calc(var(--base-padding) + var(--p-index-padding-vertical));
+  padding-right: calc(var(--base-padding) + var(--p-index-padding-horizontal));
+}
+
+.contentOverlay p:nth-child(odd) {
+  text-align: left;
+  padding-top: calc(var(--base-padding) + var(--p-index-padding-vertical));
+  padding-right: 0;
+}
+
+.container p:nth-child(1) {
+  --p-index-padding-vertical: -4px;
+}
+.container p:nth-child(2) {
+  --p-index-padding-vertical: 5px;
+  --p-index-padding-horizontal: -10px;
+}
+.container p:nth-child(3) {
+  --p-index-padding-vertical: 25px;
+}
+.container p:nth-child(4) {
+  --p-index-padding-vertical: 27px;
+  --p-index-padding-horizontal: -8px;
+}
+
+.container p:nth-child(5) {
+  --p-index-padding-vertical: 27px;
+}
+
+.contentOverlay p:nth-last-child(1) {
+  width: 230px;
+}
+.contentOverlay::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.headingWrapper {
+  padding: 15px 0 44px 0;
+}
+
+.textGradient {
+  background: linear-gradient(90deg, #fabbff 0%, #b179ff 100%, #6dddff 83%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

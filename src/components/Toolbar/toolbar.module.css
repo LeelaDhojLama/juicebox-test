@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.iconWrapper {
+  width: 46px;
+  height: 46px;
+  border-radius: 200px;
+  background: #ffffff0d;
+  box-shadow: 0px 4px 20px 0px #0000000d;
+  display: flex;
+  align-items: center; /* Centers icon vertically */
+  justify-content: center;
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title img {
+  padding-inline: 0.05rem;
+}

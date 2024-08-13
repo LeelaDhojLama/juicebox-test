@@ -1,0 +1,25 @@
+@media only screen and (max-width: 768px) {
+  .container {
+    /*height: 410px;*/
+  }
+  .maskedImage {
+    display: block;
+    width: 100%;
+    height: auto;
+    /*height: 354px;*/
+    padding: 40px 25px 19px 12px;
+    overflow: hidden;
+  }
+
+  .maskedImage img {
+    height: 100%;
+    mask-image: url("Vector.svg");
+    -webkit-mask-image: url("Vector.svg");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    transform: rotate(180deg);
+    margin: auto;
+  }
+}
