@@ -54,7 +54,7 @@ function AnimatedLogo() {
         end: "bottom bottom",
         scrub: true,
         onUpdate: (self) => {
-          if (self.progress > 0.5) {
+          if (self.progress > 0.1) {
             animation.play();
           } else {
             animation.reverse();
