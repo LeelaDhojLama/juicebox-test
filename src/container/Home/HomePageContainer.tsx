@@ -49,10 +49,10 @@ function HomePageContainer() {
           "<"
         );
 
-      tl.to(imgRef.current, {
-        rotate: 1,
-        duration: 1,
-      });
+      //tl.to(imgRef.current, {
+      //  rotate: 1,
+      //  duration: 1,
+      //});
     }
   }, []);
 

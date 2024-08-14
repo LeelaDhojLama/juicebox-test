@@ -16,7 +16,7 @@ const SpeechVector: React.FC<AITalkVectorProps> = ({ width, imgRef }) => {
       <div className={`${styles.maskedImage}`}>
         <div style={{ width: width, margin: "auto" }}>
           <Image
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
             ref={imgRef}
             src="/bg-image.png"
             alt="vector"

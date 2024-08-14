@@ -1,31 +1,28 @@
 "use client";
 import { useEffect, useRef } from "react";
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function AnimatedLogo() {
   const bRef = useRef<SVGPathElement>(null);
   const uRef = useRef<SVGPathElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
+  const createAnimation = () => {
+    const timeline = gsap.timeline({ paused: true });
     if (!svgRef.current) {
       return;
     }
-
     const paths = svgRef.current.querySelectorAll("path");
-
-    const tl = gsap.timeline({
-      paused: true,
-    });
-
-    tl.to(bRef.current, {
+    timeline.to(bRef.current, {
       duration: 0.5,
       x: -60,
       ease: "elastic.inOut",
     });
 
-    tl.to(
+    timeline.to(
       [
         paths[paths.length - 7],
         paths[paths.length - 4],
@@ -45,8 +42,29 @@ function AnimatedLogo() {
       "<"
     );
 
-    const handleMouseEnter = () => tl.play();
-    const handleMouseLeave = () => tl.reverse();
+    return timeline;
+  };
+
+  useEffect(() => {
+    let animation = createAnimation()!;
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: "html",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          if (self.progress > 0.5) {
+            animation.play();
+          } else {
+            animation.reverse();
+          }
+        },
+      },
+    });
+
+    const handleMouseEnter = () => animation.play();
+    const handleMouseLeave = () => animation.reverse();
 
     svgRef.current!.addEventListener("mouseenter", handleMouseEnter);
     svgRef.current!.addEventListener("mouseleave", handleMouseLeave);
