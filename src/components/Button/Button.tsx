@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import styles from "./button.module.css";
+import styles from "./Button.module.css";
 import { buttonStyles, ButtonVariant } from "./ButtonVariant";
 
 interface ButtonProps {
