@@ -50,11 +50,11 @@ function AnimatedLogo() {
     gsap.timeline({
       scrollTrigger: {
         trigger: "html",
-        start: "top top",
-        end: "bottom bottom",
+        start: "top 0%",
+        end: "bottom 90%",
         scrub: true,
         onUpdate: (self) => {
-          if (self.progress > 0.1) {
+          if (self.progress >= 0.5) {
             animation.play();
           } else {
             animation.reverse();
