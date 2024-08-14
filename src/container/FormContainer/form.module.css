@@ -1,8 +1,8 @@
 @media (max-width: 768px) {
   .formContainer {
     position: absolute;
-    bottom: 8px;
-    right: 6px;
-    left: 6px;
+    bottom: var(--base-spacing);
+    right: var(--base-spacing);
+    left: var(--base-spacing);
   }
 }

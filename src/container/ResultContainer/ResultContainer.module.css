@@ -1,8 +1,8 @@
 @media (max-width: 768px) {
   .resultContainer {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    left: 20px;
+    bottom: var(--base-spacing);
+    right: var(--base-spacing);
+    left: var(--base-spacing);
   }
 }
