@@ -16,7 +16,7 @@ function Button({ variant, label, onClick, focused = false }: ButtonProps) {
     if (focused && buttonRef.current) {
       buttonRef.current.focus();
     }
-  }, []);
+  }, [focused]);
   return (
     <button
       ref={buttonRef}

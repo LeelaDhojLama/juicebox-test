@@ -1,8 +1,16 @@
 "use client";
-import Lottie, { LottieRefCurrentProps } from "lottie-react";
+
+import { LottieRefCurrentProps } from "lottie-react";
 import animationData from "../../../public/JB2G_JAI.json";
 import { useEffect, useRef, useState } from "react";
 import { AnimationDirection } from "lottie-web";
+
+import dynamic from "next/dynamic";
+
+// Dynamically import the Lottie component with SSR disabled
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 interface LottieAnimation {
   autoPlay?: boolean;
@@ -30,7 +38,6 @@ const LottieAnimation: React.FC<LottieAnimation> = ({ autoPlay = false }) => {
       <Lottie
         lottieRef={lottieRef}
         animationData={animationData}
-        aria-aria-labelledby="use lottie animation"
         autoplay={autoPlay}
         loop={autoPlay}
         start={0}

@@ -52,7 +52,7 @@ function AnimatedLogo() {
 
     svgRef.current!.addEventListener("mouseenter", handleMouseEnter);
     svgRef.current!.addEventListener("mouseleave", handleMouseLeave);
-  }, []);
+  }, [tl]);
   return (
     <section>
       <div>

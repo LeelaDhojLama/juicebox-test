@@ -4,7 +4,6 @@ import "./globals.css";
 import ToolBar from "@/components/Toolbar";
 import Container from "@/components/Container/Container";
 import Lenis from "@/components/SmoothScroll";
-import { ToolBarBackClickProvider } from "@/conext/ScaleContext";
 import AppLayout from "./layout/app";
 
 const inter = Inter({ subsets: ["latin"] });

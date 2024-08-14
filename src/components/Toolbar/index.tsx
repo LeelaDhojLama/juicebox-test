@@ -3,7 +3,7 @@ import { ArrowLeftIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
 import styles from "./toolbar.module.css";
 import LogoAnimation from "../AnimatedLogo";
 import { useRouter } from "next/navigation";
-import { ToolBarBackClickProvider, useClick } from "@/conext/ScaleContext";
+import { useEffect } from "react";
 
 interface ToolBarProps {
   showBackButton?: boolean;
@@ -12,16 +12,23 @@ interface ToolBarProps {
 
 export default function ToolBar({
   showBackButton = true,
-  onBackClick = useRouter().back,
+  onBackClick,
 }: ToolBarProps) {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       {showBackButton ? (
-        <div className={styles.iconWrapper} onClick={onBackClick}>
+        <div
+          className={styles.iconWrapper}
+          onClick={() => {
+            onBackClick ? onBackClick() : router.back();
+          }}
+        >
           <ArrowLeftIcon className={styles.icon} />
         </div>
       ) : (
-        <div className="" onClick={onBackClick}></div>
+        <div className=""></div>
       )}
       <LogoAnimation />
       <div className={styles.iconWrapper}>

@@ -36,7 +36,7 @@ function HomePageContainer() {
         "<"
       );
     }
-  }, []);
+  }, [tl]);
 
   const onClick = () => {
     tl.to(imgRef.current, {
