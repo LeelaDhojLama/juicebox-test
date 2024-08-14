@@ -13,8 +13,8 @@
 
   .maskedImage img {
     height: 100%;
-    mask-image: url("Vector.svg");
-    -webkit-mask-image: url("Vector.svg");
+    mask-image: url("/Vector.svg");
+    -webkit-mask-image: url("/Vector.svg");
     mask-size: contain;
     -webkit-mask-size: contain;
     mask-repeat: no-repeat;

@@ -3,6 +3,7 @@
 import Lottie, { AnimationItem } from "lottie-web";
 import React, { use, useEffect, useRef } from "react";
 import styles from "./SpeechVector.module.css";
+import Image from "next/image";
 
 interface AITalkVectorProps {
   width?: number | string;
@@ -13,12 +14,17 @@ const SpeechVector: React.FC<AITalkVectorProps> = ({ width, imgRef }) => {
   return (
     <div className={styles.container}>
       <div className={`${styles.maskedImage}`}>
-        <img
-          ref={imgRef}
-          src="/bg-image.png"
-          alt="vector"
-          style={{ width: width }}
-        />
+        <div style={{ width: width, margin: "auto" }}>
+          <Image
+            objectFit="cover"
+            ref={imgRef}
+            src="/bg-image.png"
+            alt="vector"
+            width={1200}
+            height={800}
+            layout="responsive"
+          />
+        </div>
       </div>
     </div>
   );

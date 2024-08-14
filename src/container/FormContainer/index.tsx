@@ -1,17 +1,22 @@
 "use client";
-import LottieAnimation from "@/components/LottieAnimation";
-import TextInput from "@/components/TextInput/TextInput";
-import Label from "@/components/Label";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 
 import styles from "./form.module.css";
+
+import TextInput from "@/components/TextInput/TextInput";
+import Label from "@/components/Label";
 import ToolBar from "@/components/Toolbar";
 import { LottieRefCurrentProps } from "lottie-react";
 import gsap from "gsap";
 import { LabelVariant } from "@/components/Label/LabelVariant";
 import { validateEmail, validateName } from "@/utils/FormValidation";
 
+const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
+  ssr: false,
+});
 export interface User {
   name: string;
   email: string;

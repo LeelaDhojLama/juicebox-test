@@ -1,29 +1,44 @@
 "use client";
 
-import { LottieRefCurrentProps } from "lottie-react";
-import animationData from "../../../public/JB2G_JAI.json";
-import { useEffect, useRef, useState } from "react";
-import { AnimationDirection } from "lottie-web";
+import lottie from "lottie-web";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
-import dynamic from "next/dynamic";
-
-// Dynamically import the Lottie component with SSR disabled
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
-
-interface LottieAnimation {
+interface LottieAnimationPropTypes {
   autoPlay?: boolean;
 }
 
-const LottieAnimation: React.FC<LottieAnimation> = ({ autoPlay = false }) => {
-  const lottieRef = useRef<LottieRefCurrentProps>(null);
+const LottieAnimation: React.FC<LottieAnimationPropTypes> = ({
+  autoPlay = false,
+}) => {
+  const lottieRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (lottieRef.current) {
-      lottieRef.current.setSpeed(15);
+      let lottieAnimation = lottie.loadAnimation({
+        container: lottieRef.current!,
+        renderer: "svg",
+        path: "/JB2G_JAI.json",
+        autoplay: autoPlay,
+      });
+
+      if (autoPlay) {
+        lottieAnimation.show();
+        gsap.to(lottieRef.current, {
+          rotate: 360,
+          yoyo: true,
+          duration: 1,
+          repeat: -1,
+        });
+      } else {
+        lottieAnimation.stop();
+      }
+
+      return () => {
+        lottieAnimation.destroy();
+      };
     }
-  }, []);
+  }, [autoPlay]);
   return (
     <div
       className="rotating-lottie-container"
@@ -35,13 +50,7 @@ const LottieAnimation: React.FC<LottieAnimation> = ({ autoPlay = false }) => {
         paddingBottom: 48,
       }}
     >
-      <Lottie
-        lottieRef={lottieRef}
-        animationData={animationData}
-        autoplay={autoPlay}
-        loop={autoPlay}
-        start={0}
-      />
+      <div ref={lottieRef}></div>
     </div>
   );
 };

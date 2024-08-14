@@ -42,7 +42,7 @@ const SwiperContainer = () => {
     if (isSwiperLastIndex) {
       tl.to(imgRef.current, {
         width: 32,
-        duration: 1,
+        duration: 0.8,
         opacity: 0,
         onComplete: () => {
           router.push("/pages/form");
@@ -99,15 +99,17 @@ const SwiperContainer = () => {
               }
             )}
           </Swiper>
-          <Button
-            variant={
-              isSwiperLastIndex
-                ? ButtonVariant.secondary
-                : ButtonVariant.secondaryOutline
-            }
-            label={isSwiperLastIndex ? "Get Started" : "Continue"}
-            onClick={onNextClick}
-          />
+          <div style={{ paddingTop: 32 }}>
+            <Button
+              variant={
+                isSwiperLastIndex
+                  ? ButtonVariant.secondary
+                  : ButtonVariant.secondaryOutline
+              }
+              label={isSwiperLastIndex ? "Get Started" : "Continue"}
+              onClick={onNextClick}
+            />
+          </div>
         </div>
       </div>
     </>

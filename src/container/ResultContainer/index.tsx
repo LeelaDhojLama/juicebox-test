@@ -1,5 +1,4 @@
 "use client";
-import LottieAnimation from "@/components/LottieAnimation";
 import Label from "@/components/Label";
 import { useEffect, useState } from "react";
 import { User } from "@/container/FormContainer";
@@ -9,6 +8,11 @@ import Button from "@/components/Button/Button";
 import { ButtonVariant } from "@/components/Button/ButtonVariant";
 
 import styles from "./ResultContainer.module.css";
+import dynamic from "next/dynamic";
+
+const LottieAnimation = dynamic(() => import("@/components/LottieAnimation"), {
+  ssr: false,
+});
 
 function ResultContainer() {
   const [userData, setUserData] = useState<User>({ name: "", email: "" });

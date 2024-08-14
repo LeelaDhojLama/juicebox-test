@@ -7,58 +7,81 @@ import { useRouter, usePathname } from "next/navigation";
 import SpeechVector from "@/components/SpeechVector";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Label from "@/components/Label";
 import { LabelVariant } from "@/components/Label/LabelVariant";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function HomePageContainer() {
   const router = useRouter();
   const divRef = useRef<HTMLDivElement>(null);
+  const containerDivRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const pathname = usePathname();
-
-  const tl = gsap.timeline();
 
   useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "html",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        //markers: true,
+      },
+    });
+
     if (divRef) {
-      tl.fromTo(
-        imgRef.current,
-        { scale: 0.8, opacity: 0 }, // Starting state
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1.5,
-          ease: "elastic.out(1, 0.5)",
-        }
-      ).fromTo(
-        divRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 1, ease: "power2.inOut" },
-        "<"
-      );
+      gsap
+        .timeline()
+        .fromTo(
+          containerDivRef.current,
+          { scale: 0, opacity: 0 }, // Starting state
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+          }
+        )
+        .fromTo(
+          divRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 1, ease: "power2.out" },
+          "<"
+        );
+
+      tl.to(imgRef.current, {
+        rotate: 1,
+        duration: 1,
+      });
     }
-  }, [tl]);
+  }, []);
 
   const onClick = () => {
-    tl.to(imgRef.current, {
-      width: "50%",
-      duration: 1,
-      ease: "power2.inOut",
-      onComplete: () => {
-        // Navigate to the new route after the animation completes
-        router.push("/pages/tutorial");
-      },
-    }).to(
-      divRef.current,
-      { opacity: 0, duration: 1, ease: "power2.inOut" },
-      "<"
-    );
+    gsap
+      .timeline()
+      .to(imgRef.current, {
+        width: "50%",
+        duration: 1,
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Navigate to the new route after the animation completes
+          router.push("/pages/tutorial");
+        },
+      })
+      .to(
+        divRef.current,
+        { opacity: 0, duration: 0.5, ease: "power2.inOut" },
+        "<"
+      );
   };
 
   return (
     <>
       <div className={styles.container}>
         <div className="relative">
-          <SpeechVector width={"100%"} imgRef={imgRef} />
+          <div style={{ opacity: 0 }} ref={containerDivRef}>
+            <SpeechVector width={"100%"} imgRef={imgRef} />
+          </div>
           <div ref={divRef}>
             <div className={`${styles.contentOverlay} content-overlay`}>
               <p>WA businesses feel confident about future growth</p>

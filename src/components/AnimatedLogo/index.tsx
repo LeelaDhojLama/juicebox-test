@@ -2,29 +2,27 @@
 import { useEffect, useRef } from "react";
 
 import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function AnimatedLogo() {
   const bRef = useRef<SVGPathElement>(null);
   const uRef = useRef<SVGPathElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  //  gsap.registerPlugin(MotionPathPlugin);
-
-  const tl = gsap.timeline({ paused: true });
-
   useEffect(() => {
     if (!svgRef.current) {
       return;
     }
-    const paths = svgRef.current!.querySelectorAll("path");
-    const customEase = "cubic-bezier(.68,-.55,.265,1.55)";
+
+    const paths = svgRef.current.querySelectorAll("path");
+
+    const tl = gsap.timeline({
+      paused: true,
+    });
+
     tl.to(bRef.current, {
       duration: 0.5,
       x: -60,
       ease: "elastic.inOut",
-      transform: "translate3d(-50px, 0, 0)",
     });
 
     tl.to(
@@ -39,11 +37,11 @@ function AnimatedLogo() {
       ],
       {
         duration: 0.5,
-        x: -400, // Adjust this value to slide out of view
+        x: -400,
         opacity: 0,
         ease: "power3.inOut",
-        transform: "translate3d(-50px, 0, 0)",
       },
+
       "<"
     );
 
@@ -52,7 +50,7 @@ function AnimatedLogo() {
 
     svgRef.current!.addEventListener("mouseenter", handleMouseEnter);
     svgRef.current!.addEventListener("mouseleave", handleMouseLeave);
-  }, [tl]);
+  }, []);
   return (
     <section>
       <div>
